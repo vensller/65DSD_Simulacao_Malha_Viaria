@@ -9,9 +9,14 @@ public class Vertice {
     private int x;
     private int y;
 
-    public Vertice(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Vertice(int x, int y, boolean usarEscala) {
+        if (usarEscala){
+            this.x = x*10;
+            this.y = y*10;   
+        }else{
+            this.x = x;
+            this.y = y;
+        }
     }
 
     public int getX() {

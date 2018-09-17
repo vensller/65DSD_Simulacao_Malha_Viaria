@@ -19,6 +19,10 @@ public class MalhaViaria {
         arestas.add(a);
     }    
 
+    public List<Aresta> getArestas() {
+        return arestas;
+    }
+
     @Override
     public String toString() {
         String retorno = "";

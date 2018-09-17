@@ -1,7 +1,6 @@
 package Main;
 
-import Utilities.ArchiveReader;
-import javax.swing.JFileChooser;
+import View.TelaMalha;
 
 /**
  *
@@ -10,13 +9,8 @@ import javax.swing.JFileChooser;
 public class Main {
     
     public static void main(String[] args){
-        JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
-        int result = fileChooser.showDialog(null, "Escolha");        
-        if (result == JFileChooser.APPROVE_OPTION){
-            ArchiveReader reader = new ArchiveReader();
-            reader.readMalhaViaria(fileChooser.getSelectedFile().getAbsolutePath());
-            System.out.println("Teste!");              
-        }     
+        TelaMalha tela = new TelaMalha();
+        tela.setVisible(true);        
     }
     
 }

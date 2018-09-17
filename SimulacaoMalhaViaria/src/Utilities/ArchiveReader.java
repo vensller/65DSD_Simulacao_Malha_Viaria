@@ -31,8 +31,8 @@ public class ArchiveReader {
                     throw new IOException("Arquivo no formato incorreto!");
                 }                
                 
-                Vertice origem = new Vertice(Integer.parseInt(arrayStr[0]), Integer.parseInt(arrayStr[1]));
-                Vertice destino = new Vertice(Integer.parseInt(arrayStr[2]), Integer.parseInt(arrayStr[3]));
+                Vertice origem = new Vertice(Integer.parseInt(arrayStr[0]), Integer.parseInt(arrayStr[1]), true);
+                Vertice destino = new Vertice(Integer.parseInt(arrayStr[2]), Integer.parseInt(arrayStr[3]), true);
                 malha.addAresta(new Aresta(origem, destino));
             }
             

@@ -17,6 +17,7 @@ public class Aresta {
         this.inicio = inicio;
         this.fim = fim;
         this.caminho = new ArrayList();
+        definirCaminho();
     }
 
     public Vertice getInicio() {
@@ -33,8 +34,30 @@ public class Aresta {
 
     public void setFim(Vertice fim) {
         this.fim = fim;
+    }   
+
+    public List<Vertice> getCaminho() {
+        return caminho;
     }
 
-    
+    private void definirCaminho(){
+        if (inicio.getX() != fim.getX()){
+            if (inicio.getX() < fim.getX()){
+                for (int x = inicio.getX() + 1; x < fim.getX(); x++)
+                    caminho.add(new Vertice(x, inicio.getY(), false));
+            }else{
+                for (int x = fim.getX() + 1; x < inicio.getX(); x++)
+                    caminho.add(new Vertice(x, inicio.getY(), false));
+            }
+        }else{
+            if (inicio.getY() < fim.getY()){
+                for (int y = inicio.getY() + 1; y < fim.getY(); y++)
+                    caminho.add(new Vertice(inicio.getX(), y, false));
+            }else{
+                for (int y = fim.getY() + 1; y < inicio.getY(); y++)
+                    caminho.add(new Vertice(inicio.getX(), y, false));
+            }            
+        }
+    }
     
 }
