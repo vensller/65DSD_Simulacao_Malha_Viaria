@@ -39,7 +39,9 @@ public class MalhaViaria {
     //Falta aplicar exclusão mútua
     public Vertice getBordaLivre(){        
         if (!bordasLivres.isEmpty()){
-            return bordasLivres.get(0);
+            Vertice retorno = bordasLivres.get(0);
+            bordasLivres.remove(0);
+            return retorno;
         }
         
         return null;

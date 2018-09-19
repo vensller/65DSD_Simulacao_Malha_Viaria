@@ -14,8 +14,7 @@ public class Veiculo extends Thread{
         this.malha = malha;
         this.obs = obs;
         this.verticeAtual = null;
-    }
-    
+    }    
     
     @Override
     public void run() {
