@@ -44,18 +44,18 @@ public class Aresta {
         if (inicio.getX() != fim.getX()){
             if (inicio.getX() < fim.getX()){
                 for (int x = inicio.getX() + 1; x < fim.getX(); x++)
-                    caminho.add(new Vertice(x, inicio.getY(), false));
+                    caminho.add(new Vertice(x, inicio.getY(), false, false));
             }else{
                 for (int x = fim.getX() + 1; x < inicio.getX(); x++)
-                    caminho.add(new Vertice(x, inicio.getY(), false));
+                    caminho.add(new Vertice(x, inicio.getY(), false, false));
             }
         }else{
             if (inicio.getY() < fim.getY()){
                 for (int y = inicio.getY() + 1; y < fim.getY(); y++)
-                    caminho.add(new Vertice(inicio.getX(), y, false));
+                    caminho.add(new Vertice(inicio.getX(), y, false, false));
             }else{
                 for (int y = fim.getY() + 1; y < inicio.getY(); y++)
-                    caminho.add(new Vertice(inicio.getX(), y, false));
+                    caminho.add(new Vertice(inicio.getX(), y, false, false));
             }            
         }
     }

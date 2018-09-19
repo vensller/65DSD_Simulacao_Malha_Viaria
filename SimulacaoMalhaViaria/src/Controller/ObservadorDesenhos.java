@@ -8,5 +8,6 @@ public interface ObservadorDesenhos {
     
     void desenharVertice(int x, int y);
     void desenharPontoAresta(int x, int y);
+    void desenharVeiculo(int x, int y);
     
 }

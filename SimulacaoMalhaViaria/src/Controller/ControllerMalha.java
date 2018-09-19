@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Aresta;
 import Model.MalhaViaria;
+import Model.ObservadorVeiculo;
+import Model.Veiculo;
 import Model.Vertice;
 import Utilities.ArchiveReader;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.List;
  *
  * @author Ivens
  */
-public class ControllerMalha {
+public class ControllerMalha implements ObservadorVeiculo{
     
     private ArchiveReader reader;
     private MalhaViaria malha;   
@@ -63,6 +65,9 @@ public class ControllerMalha {
                desenhaVertice(a.getInicio().getX(), a.getInicio().getY());
                desenhaVertice(a.getFim().getX(), a.getFim().getY());           
            }
+           
+           Veiculo veiculo = new Veiculo(malha, this);
+           veiculo.start();
        }
    }
    
@@ -80,7 +85,7 @@ public class ControllerMalha {
        for (ObservadorDesenhos obs : observadoresDesenhos)
            obs.desenharVertice(x, y);
    }
-   
+    
    private void notificaMalhaCarregada(){
        for (ObservadorMalha obs : observadores)
            obs.malhaCarregada();
@@ -89,6 +94,18 @@ public class ControllerMalha {
    private void notificaErroMalha(){
        for (ObservadorMalha obs : observadores)
            obs.erroCarregarMalha();
+   }
+
+    @Override
+    public void removeDesenhoCarro(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public void desenhaCarro(int x, int y){
+       for (ObservadorDesenhos obs : observadoresDesenhos){
+           obs.desenharVeiculo(x, y);
+       }
    }
     
 }

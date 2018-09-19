@@ -15,9 +15,7 @@ public class PainelMalha extends javax.swing.JPanel implements ObservadorDesenho
 
     private ControllerMalha controller;
     private Graphics graphics;
-    /**
-     * Creates new form PainelMalha
-     */
+    
     public PainelMalha(ControllerMalha controller) {
         this.controller = controller;
         this.controller.observarDesenhos(this);
@@ -58,11 +56,16 @@ public class PainelMalha extends javax.swing.JPanel implements ObservadorDesenho
         if (graphics != null) desenhaPonto(x, y, Color.GRAY);
     }
     
+    @Override
+    public void desenharVeiculo(int x, int y) {
+        if (graphics != null) desenhaPonto(x, y, Color.BLUE);
+    }
+    
     private void desenhaPonto(int x, int y, Color cor){
         Graphics2D g2 = (Graphics2D) graphics;
         Ellipse2D.Double circle = new Ellipse2D.Double(x - 4, y - 4, 8, 8);
         g2.setColor(cor);
-        g2.fill(circle);
+        g2.fill(circle);        
     }
 
 

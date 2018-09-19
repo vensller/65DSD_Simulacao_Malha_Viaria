@@ -20,8 +20,12 @@ public class ArchiveReader {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(archive));            
-            String str = reader.readLine();
-            str = reader.readLine();
+            int linhas = 0;
+            int colunas = 0;
+            String str = reader.readLine().trim();
+            linhas = Integer.parseInt(str);
+            str = reader.readLine().trim();
+            colunas = Integer.parseInt(str);
             String[] arrayStr = null;                        
             
             while ((str = reader.readLine()) != null) {                
@@ -30,9 +34,16 @@ public class ArchiveReader {
                 if (arrayStr.length != 4){
                     throw new IOException("Arquivo no formato incorreto!");
                 }                
-                
-                Vertice origem = new Vertice(Integer.parseInt(arrayStr[0]), Integer.parseInt(arrayStr[1]), true);
-                Vertice destino = new Vertice(Integer.parseInt(arrayStr[2]), Integer.parseInt(arrayStr[3]), true);
+                                                
+                int x = Integer.parseInt(arrayStr[0]);
+                int y = Integer.parseInt(arrayStr[1]);
+                boolean isBorda = (x == 0) || (x == colunas - 1) || (y == 0) || (y == linhas - 1);         
+                Vertice origem = new Vertice(x, y, true, isBorda);
+                                                
+                x = Integer.parseInt(arrayStr[2]);
+                y = Integer.parseInt(arrayStr[3]);
+                isBorda = (x == 0) || (x == colunas - 1) || (y == 0) || (y == linhas - 1);
+                Vertice destino = new Vertice(x, y, true, isBorda);
                 malha.addAresta(new Aresta(origem, destino));
             }
             
@@ -41,6 +52,7 @@ public class ArchiveReader {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+        malha.defineBordasLivres();
         System.out.println(malha);
         return malha;
     }
