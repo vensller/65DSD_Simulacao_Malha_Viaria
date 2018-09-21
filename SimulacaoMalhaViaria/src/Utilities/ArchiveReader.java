@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -46,7 +47,7 @@ public class ArchiveReader {
                 isBorda = (x == 0) || (x == colunas - 1) || (y == 0) || (y == linhas - 1);
                 Vertice destino = new Vertice(x, y, true, isBorda);
 
-                List<Aresta> arestasSaidas = null;
+                List<Aresta> arestasSaidas = new ArrayList<>();
                 if (!destino.isBorda()) {
 
                     for (Aresta a : malha.getArestas()) {
