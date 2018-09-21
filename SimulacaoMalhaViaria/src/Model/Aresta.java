@@ -12,9 +12,9 @@ public class Aresta {
     private Vertice inicio;
     private Vertice fim;
     private List<Vertice> caminho;
-    private List<Vertice> saidas;
+    private List<Aresta> saidas;
 
-    public Aresta(Vertice inicio, Vertice fim) {
+    public Aresta(Vertice inicio, Vertice fim, List<Aresta> saidas) {
         this.inicio = inicio;
         this.fim = fim;
         this.caminho = new ArrayList();
@@ -41,11 +41,11 @@ public class Aresta {
         return caminho;
     }
 
-    public List<Vertice> getSaidas() {
+    public List<Aresta> getSaidas() {
         return saidas;
     }
 
-    public void setSaidas(List<Vertice> saidas) {
+    public void setSaidas(List<Aresta> saidas) {
         this.saidas = saidas;
     }
     
