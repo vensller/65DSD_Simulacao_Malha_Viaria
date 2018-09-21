@@ -11,7 +11,8 @@ public class Aresta {
     
     private Vertice inicio;
     private Vertice fim;
-    private List<Vertice> caminho;    
+    private List<Vertice> caminho;
+    private List<Vertice> saidas;
 
     public Aresta(Vertice inicio, Vertice fim) {
         this.inicio = inicio;
@@ -40,6 +41,14 @@ public class Aresta {
         return caminho;
     }
 
+    public List<Vertice> getSaidas() {
+        return saidas;
+    }
+
+    public void setSaidas(List<Vertice> saidas) {
+        this.saidas = saidas;
+    }
+    
     private void definirCaminho(){
         if (inicio.getX() != fim.getX()){
             if (inicio.getX() < fim.getX()){

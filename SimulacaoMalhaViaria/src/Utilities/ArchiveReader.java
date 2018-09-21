@@ -44,12 +44,17 @@ public class ArchiveReader {
                 y = Integer.parseInt(arrayStr[3]);
                 isBorda = (x == 0) || (x == colunas - 1) || (y == 0) || (y == linhas - 1);
                 Vertice destino = new Vertice(x, y, true, isBorda);
-                if(!destino.isBorda()){
-                for (malha.getArestas().) {
-                    
-                }
-                }
+                
                 malha.addAresta(new Aresta(origem, destino));
+               
+                if(!destino.isBorda()){
+                for (Aresta a : malha.getArestas()) {
+                    if(a.getInicio().getX() == destino.getX() && 
+                       a.getInicio().getY() == destino.getY()){
+                       
+                    }
+                }
+                }
                 
                 
                 
