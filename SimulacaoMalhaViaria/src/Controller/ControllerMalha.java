@@ -27,36 +27,44 @@ public class ControllerMalha implements ObservadorVeiculo{
         this.observadoresDesenhos = new ArrayList();
     }
     
-   public void carregarMalha(String archive){
+    public void carregarMalha(String archive){
        this.malha = reader.readMalhaViaria(archive);       
        
        if (malha != null){
            notificaMalhaCarregada();
        }else notificaErroMalha();
-   }  
+    }  
    
-   public void limparMalha(){
+    public void limparMalha(){
        this.malha = null;
        notificaMalhaLimpa();
    }
    
-   public void observar(ObservadorMalha observador){
+    public void observar(ObservadorMalha observador){
        this.observadores.add(observador);
-   }  
+    }  
    
-   public void pararObservacao(ObservadorMalha observador){
+    public void pararObservacao(ObservadorMalha observador){
        this.observadores.remove(observador);
-   }
+    }
    
-   public void observarDesenhos(ObservadorDesenhos observador){
+    public void observarDesenhos(ObservadorDesenhos observador){
        this.observadoresDesenhos.add(observador);
-   }
+    }
    
-   public void pararObservarDesenhos(ObservadorDesenhos observador){
+    public void pararObservarDesenhos(ObservadorDesenhos observador){
        this.observadoresDesenhos.remove(observador);
-   }
+    }       
    
-   public void desenharMalhaViaria(){
+    public void desenhaCarros(){
+        if (malha != null){
+            for (Vertice v : malha.getVerticesCarros()){
+                desenhaCarro(v.getX(), v.getY());
+            }
+        }
+    }   
+   
+    public void desenharMalhaViaria(){
        if (malha != null){
            for (Aresta a : malha.getArestas()){           
                for (Vertice v : a.getCaminho())
@@ -65,47 +73,56 @@ public class ControllerMalha implements ObservadorVeiculo{
                desenhaVertice(a.getInicio().getX(), a.getInicio().getY());
                desenhaVertice(a.getFim().getX(), a.getFim().getY());           
            }
-           
+       }
+    }
+    
+    public void iniciaSimulacao(){          
            Veiculo veiculo = new Veiculo(malha, this);
            veiculo.start();
-       }
-   }
-   
-   private void notificaMalhaLimpa(){
-       for (ObservadorMalha obs : observadores)
-           obs.malhaLimpa();
-   }
-   
-   private void desenhaPontoAresta(int x, int y){
-       for (ObservadorDesenhos obs : observadoresDesenhos)
-           obs.desenharPontoAresta(x, y);
-   }
-   
-   private void desenhaVertice(int x, int y){
-       for (ObservadorDesenhos obs : observadoresDesenhos)
-           obs.desenharVertice(x, y);
-   }
-    
-   private void notificaMalhaCarregada(){
-       for (ObservadorMalha obs : observadores)
-           obs.malhaCarregada();
-   }
-   
-   private void notificaErroMalha(){
-       for (ObservadorMalha obs : observadores)
-           obs.erroCarregarMalha();
-   }
-
-    @Override
-    public void removeDesenhoCarro(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
-    public void desenhaCarro(int x, int y){
+    public void removeDesenhoCarro(Vertice v) {
+        malha.getVerticesCarros().remove(v);
+    }
+    
+    @Override
+    public void setaPosicaoCarro(Vertice v) {
+        malha.getVerticesCarros().add(v);
+        for (ObservadorMalha obs : observadores){
+            obs.repintar();
+        }
+    }
+   
+    private void notificaMalhaLimpa(){
+       for (ObservadorMalha obs : observadores)
+           obs.malhaLimpa();
+    }
+   
+    private void desenhaPontoAresta(int x, int y){
+       for (ObservadorDesenhos obs : observadoresDesenhos)
+           obs.desenharPontoAresta(x, y);
+    }
+   
+    private void desenhaVertice(int x, int y){
+       for (ObservadorDesenhos obs : observadoresDesenhos)
+           obs.desenharVertice(x, y);
+    }
+    
+    private void notificaMalhaCarregada(){
+       for (ObservadorMalha obs : observadores)
+           obs.malhaCarregada();
+    }
+   
+    private void notificaErroMalha(){
+       for (ObservadorMalha obs : observadores)
+           obs.erroCarregarMalha();
+    }
+
+    private void desenhaCarro(int x, int y){
        for (ObservadorDesenhos obs : observadoresDesenhos){
            obs.desenharVeiculo(x, y);
        }
-   }
+    }   
     
 }

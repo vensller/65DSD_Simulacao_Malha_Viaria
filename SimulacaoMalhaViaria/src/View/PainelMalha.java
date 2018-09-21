@@ -26,8 +26,9 @@ public class PainelMalha extends javax.swing.JPanel implements ObservadorDesenho
     @Override
     public void paintComponent( Graphics g ){
         super.paintComponent(g);
-        graphics = g;
+        graphics = g;        
         controller.desenharMalhaViaria();
+        controller.desenhaCarros();
     }
     
     @SuppressWarnings("unchecked")
@@ -58,7 +59,7 @@ public class PainelMalha extends javax.swing.JPanel implements ObservadorDesenho
     
     @Override
     public void desenharVeiculo(int x, int y) {
-        if (graphics != null) desenhaPonto(x, y, Color.BLUE);
+        if (graphics != null) desenhaPonto(x, y, Color.GRAY);
     }
     
     private void desenhaPonto(int x, int y, Color cor){
