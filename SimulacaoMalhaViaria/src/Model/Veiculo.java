@@ -20,7 +20,7 @@ public class Veiculo extends Thread{
     public void run() {
         if (verticeAtual == null){
             verticeAtual = malha.getBordaLivre();
-            obs.desenhaCarro(verticeAtual.getX(), verticeAtual.getY());
+            obs.setaPosicaoCarro(verticeAtual);
         }
     }   
     

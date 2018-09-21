@@ -6,7 +6,7 @@ package Model;
  */
 public interface ObservadorVeiculo {
     
-    void desenhaCarro(int x, int y);
-    void removeDesenhoCarro(int x, int y);
+    void setaPosicaoCarro(Vertice v);
+    void removeDesenhoCarro(Vertice v);
     
 }

@@ -11,10 +11,12 @@ public class MalhaViaria {
     
     private List<Aresta> arestas;    
     private List<Vertice> bordasLivres;
+    private List<Vertice> verticesCarros;
 
     public MalhaViaria() {
         arestas = new ArrayList();
         bordasLivres = new ArrayList();
+        verticesCarros = new ArrayList();
     }
     
     public void addAresta(Aresta a){
@@ -52,6 +54,10 @@ public class MalhaViaria {
             if (a.getInicio().isBorda()) bordasLivres.add(a.getInicio());
         }
     }     
+
+    public List<Vertice> getVerticesCarros() {
+        return verticesCarros;
+    }    
     
         
 }
