@@ -49,7 +49,7 @@ public class PainelMalha extends javax.swing.JPanel implements ObservadorDesenho
 
     @Override
     public void desenharVertice(int x, int y) {
-        if (graphics != null) desenhaPonto(x, y, Color.red);
+        if (graphics != null) desenhaPonto(x, y, Color.GRAY);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class PainelMalha extends javax.swing.JPanel implements ObservadorDesenho
     
     @Override
     public void desenharVeiculo(int x, int y) {
-        if (graphics != null) desenhaPonto(x, y, Color.GRAY);
+        if (graphics != null) desenhaPonto(x, y, Color.BLUE);
     }
     
     private void desenhaPonto(int x, int y, Color cor){

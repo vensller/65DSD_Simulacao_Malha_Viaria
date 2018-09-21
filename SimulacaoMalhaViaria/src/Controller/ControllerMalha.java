@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Aresta;
+import Utilities.Configuracoes;
 import Model.MalhaViaria;
 import Model.ObservadorVeiculo;
 import Model.Veiculo;
@@ -19,12 +20,14 @@ public class ControllerMalha implements ObservadorVeiculo{
     private MalhaViaria malha;   
     private List<ObservadorMalha> observadores;
     private List<ObservadorDesenhos> observadoresDesenhos;
+    private List<Veiculo> veiculos;
     
     public ControllerMalha(){
         this.reader = new ArchiveReader();
         this.malha = null;
         this.observadores = new ArrayList();
         this.observadoresDesenhos = new ArrayList();
+        this.veiculos = new ArrayList();
     }
     
     public void carregarMalha(String archive){
@@ -77,8 +80,11 @@ public class ControllerMalha implements ObservadorVeiculo{
     }
     
     public void iniciaSimulacao(){          
-           Veiculo veiculo = new Veiculo(malha, this);
-           veiculo.start();
+        for (int x = 0; x < Configuracoes.getInstance().getNumeroVeiculos(); x++){
+            Veiculo veiculo = new Veiculo(malha, this);
+            veiculos.add(veiculo);
+            veiculo.start();
+        }
     }
     
     @Override

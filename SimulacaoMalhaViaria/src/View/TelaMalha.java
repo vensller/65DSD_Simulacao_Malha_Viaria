@@ -39,6 +39,7 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
         mnOpcoes = new javax.swing.JMenu();
         btnCarregar = new javax.swing.JMenuItem();
         btnIniciarSimulacao = new javax.swing.JMenuItem();
+        btnConfiguracoes = new javax.swing.JMenuItem();
         btnLimpar = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -51,11 +52,11 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
         DesktopPane.setLayout(DesktopPaneLayout);
         DesktopPaneLayout.setHorizontalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 894, Short.MAX_VALUE)
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
         mnOpcoes.setText("Opções");
@@ -76,6 +77,14 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
         });
         mnOpcoes.add(btnIniciarSimulacao);
 
+        btnConfiguracoes.setText("Configurações");
+        btnConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfiguracoesActionPerformed(evt);
+            }
+        });
+        mnOpcoes.add(btnConfiguracoes);
+
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,13 +101,17 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DesktopPane)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(DesktopPane))
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -120,10 +133,16 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
     private void btnIniciarSimulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSimulacaoActionPerformed
         controller.iniciaSimulacao();
     }//GEN-LAST:event_btnIniciarSimulacaoActionPerformed
+
+    private void btnConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracoesActionPerformed
+        TelaConfiguracoes tela = new TelaConfiguracoes();
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnConfiguracoesActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuItem btnCarregar;
+    private javax.swing.JMenuItem btnConfiguracoes;
     private javax.swing.JMenuItem btnIniciarSimulacao;
     private javax.swing.JMenuItem btnLimpar;
     private javax.swing.JMenu jMenu1;
