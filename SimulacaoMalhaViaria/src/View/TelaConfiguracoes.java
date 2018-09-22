@@ -105,8 +105,8 @@ public class TelaConfiguracoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Long valor = (Long) formatVeiculos.getValue();
-        controller.defineNumeroVeiculos(Integer.valueOf(valor.intValue()));
+        long valor = (long) formatVeiculos.getValue();
+        controller.defineNumeroVeiculos((int) valor);
         controller.defineOpcaoExclusaoMutua(cbOpcoes.getSelectedIndex());
     }//GEN-LAST:event_btnSalvarActionPerformed
    

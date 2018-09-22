@@ -3,6 +3,8 @@ package Utilities;
 import Model.Aresta;
 import Model.MalhaViaria;
 import Model.Vertice;
+import Model.VerticeComMonitor;
+import Model.VerticeComSemaforo;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,6 +20,7 @@ import javax.swing.JOptionPane;
 public class ArchiveReader {
 
     public MalhaViaria readMalhaViaria(String archive) {
+        List<Vertice> vertices = new ArrayList();
         MalhaViaria malha = new MalhaViaria();
         BufferedReader reader;
         try {
@@ -32,33 +35,19 @@ public class ArchiveReader {
 
             while ((str = reader.readLine()) != null) {
                 arrayStr = str.split("\t");
-
-                if (arrayStr.length != 4) {
-                    throw new IOException("Arquivo no formato incorreto!");
-                }
-
+                
                 int x = Integer.parseInt(arrayStr[0]);
                 int y = Integer.parseInt(arrayStr[1]);
                 boolean isBorda = (x == 0) || (x == colunas - 1) || (y == 0) || (y == linhas - 1);
-                Vertice origem = new Vertice(x, y, true, isBorda);
+                Vertice origem = criaVertice(x, y, isBorda, vertices);     
 
                 x = Integer.parseInt(arrayStr[2]);
                 y = Integer.parseInt(arrayStr[3]);
-                isBorda = (x == 0) || (x == colunas - 1) || (y == 0) || (y == linhas - 1);
-                Vertice destino = new Vertice(x, y, true, isBorda);
+                isBorda = (x == 0) || (x == colunas - 1) || (y == 0) || (y == linhas - 1);               
+                Vertice destino = criaVertice(x, y, isBorda, vertices);
 
-                List<Aresta> arestasSaidas = new ArrayList<>();
-                if (!destino.isBorda()) {
-
-                    for (Aresta a : malha.getArestas()) {
-                        if (a.getInicio().getX() == destino.getX()
-                                && a.getInicio().getY() == destino.getY()) {
-                            arestasSaidas.add(a);
-                        }
-                    }
-                }
-
-                malha.addAresta(new Aresta(origem, destino, arestasSaidas));
+                
+                malha.addAresta(new Aresta(origem, destino));
 
             }
 
@@ -67,9 +56,45 @@ public class ArchiveReader {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+        
         malha.defineBordasLivres();
         System.out.println(malha);
+        defineSemaforos(malha);
         return malha;
+    }
+    
+    private void defineSemaforos(MalhaViaria malha){       
+        for (Aresta a : malha.getArestas()){
+            List<Aresta> arestasSaidas = new ArrayList<>();
+            if (!a.getFim().isBorda()){
+                for (Aresta b : malha.getArestas()){
+                    if (a != b){
+                        if (a.getFim() == b.getInicio())
+                            arestasSaidas.add(b);
+                    }
+                }
+            }
+            a.setSaidas(arestasSaidas);            
+        }        
+    }
+    
+    private Vertice criaVertice(int x, int y, boolean isBorda, List<Vertice> vertices){
+        Vertice retorno = null;
+        
+        for (Vertice v : vertices){
+            if ((v.getX() == x * 10) && (v.getY() == y * 10))
+                retorno = v;
+        }
+        
+        if (retorno == null){        
+            if (Configuracoes.getInstance().getOpcaoExclusaoMutua() == 0)
+                retorno = new VerticeComSemaforo(x, y, true, isBorda);
+            else retorno = new VerticeComMonitor(x, y, true, isBorda);        
+            
+            vertices.add(retorno);
+        }
+        
+        return retorno;
     }
 
 }

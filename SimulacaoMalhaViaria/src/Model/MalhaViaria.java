@@ -10,12 +10,12 @@ import java.util.List;
 public class MalhaViaria {
     
     private List<Aresta> arestas;    
-    private List<Vertice> bordasLivres;
+    private List<Aresta> arestasInicio;
     private List<Vertice> verticesCarros;
 
     public MalhaViaria() {
         arestas = new ArrayList();
-        bordasLivres = new ArrayList();
+        arestasInicio = new ArrayList();
         verticesCarros = new ArrayList();
     }
     
@@ -38,12 +38,11 @@ public class MalhaViaria {
         return retorno;
     }
     
-    //Falta aplicar exclusão mútua
-    public Vertice getBordaLivre(){        
-        if (!bordasLivres.isEmpty()){
-            Vertice retorno = bordasLivres.get(0);
-            bordasLivres.remove(0);
-            return retorno;
+    public Aresta getCaminho(){
+        for (Aresta a : arestasInicio){
+            if (a.getInicio().tentarAlocacao()){
+                return a;
+            }
         }
         
         return null;
@@ -51,7 +50,7 @@ public class MalhaViaria {
     
     public void defineBordasLivres(){
         for (Aresta a : arestas){
-            if (a.getInicio().isBorda()) bordasLivres.add(a.getInicio());
+            if (a.getInicio().isBorda()) arestasInicio.add(a);
         }
     }     
 

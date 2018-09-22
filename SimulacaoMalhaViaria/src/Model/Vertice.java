@@ -4,7 +4,7 @@ package Model;
  *
  * @author Ivens
  */
-public class Vertice {
+public abstract class Vertice {
     
     private int x;
     private int y;
@@ -45,7 +45,11 @@ public class Vertice {
         this.y = y;
     }
     
+    public abstract void alocarVertice();
     
+    public abstract boolean tentarAlocacao();
+    
+    public abstract void desalocar();
     
     
 }
