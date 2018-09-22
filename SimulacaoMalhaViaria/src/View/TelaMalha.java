@@ -7,6 +7,8 @@ package View;
 
 import Controller.ControllerMalha;
 import Controller.ObservadorMalha;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -131,7 +133,11 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnIniciarSimulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSimulacaoActionPerformed
-        controller.iniciaSimulacao();
+        try {
+            controller.iniciaSimulacao();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TelaMalha.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnIniciarSimulacaoActionPerformed
 
     private void btnConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracoesActionPerformed
@@ -175,7 +181,7 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
     }
     
     @Override
-    public void repintar(){
+    public synchronized void repintar(){
         painelMalha.repaint();
     }
 }

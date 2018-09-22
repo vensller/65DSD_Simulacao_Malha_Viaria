@@ -61,7 +61,7 @@ public class Aresta {
                     else caminho.add(new VerticeComMonitor(x, inicio.getY(), false, false));
                 }
             }else{
-                for (int x = fim.getX() + 1; x < inicio.getX(); x++){
+                for (int x = inicio.getX() - 1; x > fim.getX(); x--){
                     if (Configuracoes.getInstance().getOpcaoExclusaoMutua() == 0)
                         caminho.add(new VerticeComSemaforo(x, inicio.getY(), false, false));
                     else caminho.add(new VerticeComMonitor(x, inicio.getY(), false, false));
@@ -75,7 +75,7 @@ public class Aresta {
                     else caminho.add(new VerticeComMonitor(inicio.getX(), y, false, false));
                 }
             }else{
-                for (int y = fim.getY() + 1; y < inicio.getY(); y++){
+                for (int y = inicio.getY() - 1; y > fim.getY(); y--){
                     if (Configuracoes.getInstance().getOpcaoExclusaoMutua() == 0){
                         caminho.add(new VerticeComSemaforo(inicio.getX(), y, false, false));
                     }else caminho.add(new VerticeComMonitor(inicio.getX(), y, false, false));

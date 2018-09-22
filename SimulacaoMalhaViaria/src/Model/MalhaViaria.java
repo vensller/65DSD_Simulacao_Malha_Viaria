@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,7 +39,8 @@ public class MalhaViaria {
         return retorno;
     }
     
-    public Aresta getCaminho(){
+    public Aresta getCaminho(){ //Retorna a aresta para o veículo se locomover
+        Collections.shuffle(arestasInicio); 
         for (Aresta a : arestasInicio){
             if (a.getInicio().tentarAlocacao()){
                 return a;
@@ -48,6 +50,7 @@ public class MalhaViaria {
         return null;
     }
     
+    //Define as arestas em que o início é uma borda
     public void defineBordasLivres(){
         for (Aresta a : arestas){
             if (a.getInicio().isBorda()) arestasInicio.add(a);

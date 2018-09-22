@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.util.Random;
 
 /**
  *
@@ -61,7 +62,7 @@ public class PainelMalha extends javax.swing.JPanel implements ObservadorDesenho
     public void desenharVeiculo(int x, int y) {
         if (graphics != null) desenhaPonto(x, y, Color.BLUE);
     }
-    
+          
     private void desenhaPonto(int x, int y, Color cor){
         Graphics2D g2 = (Graphics2D) graphics;
         Ellipse2D.Double circle = new Ellipse2D.Double(x - 4, y - 4, 8, 8);

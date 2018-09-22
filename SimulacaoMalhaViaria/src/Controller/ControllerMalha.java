@@ -39,8 +39,11 @@ public class ControllerMalha implements ObservadorVeiculo{
     }  
    
     public void limparMalha(){
-       this.malha = null;
-       notificaMalhaLimpa();
+        for (Veiculo v : veiculos){
+            v.desativar();            
+        }
+        this.malha = null;
+        notificaMalhaLimpa();
    }
    
     public void observar(ObservadorMalha observador){
@@ -79,7 +82,8 @@ public class ControllerMalha implements ObservadorVeiculo{
        }
     }
     
-    public void iniciaSimulacao(){          
+    //Cria as threads baseando-se na configuração escolhida
+    public void iniciaSimulacao() throws InterruptedException{          
         for (int x = 0; x < Configuracoes.getInstance().getNumeroVeiculos(); x++){
             Veiculo veiculo = new Veiculo(malha, this);
             veiculos.add(veiculo);
@@ -88,13 +92,20 @@ public class ControllerMalha implements ObservadorVeiculo{
     }
     
     @Override
-    public void removeDesenhoCarro(Vertice v) {
+    public synchronized void removeDesenhoCarro(Vertice v) {
         malha.getVerticesCarros().remove(v);
     }
     
     @Override
-    public void setaPosicaoCarro(Vertice v) {
+    public synchronized void setaPosicaoCarro(Vertice v) {
         malha.getVerticesCarros().add(v);
+        for (ObservadorMalha obs : observadores){
+            obs.repintar();
+        }
+    }
+
+    @Override
+    public void repintar() {
         for (ObservadorMalha obs : observadores){
             obs.repintar();
         }
