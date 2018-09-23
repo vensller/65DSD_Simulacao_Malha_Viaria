@@ -29,6 +29,7 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
         initComponents();
         btnLimpar.setEnabled(false);
         btnIniciarSimulacao.setEnabled(false);
+        btnPararSimulacao.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -41,6 +42,7 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
         mnOpcoes = new javax.swing.JMenu();
         btnCarregar = new javax.swing.JMenuItem();
         btnIniciarSimulacao = new javax.swing.JMenuItem();
+        btnPararSimulacao = new javax.swing.JMenuItem();
         btnConfiguracoes = new javax.swing.JMenuItem();
         btnLimpar = new javax.swing.JMenuItem();
 
@@ -78,6 +80,14 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
             }
         });
         mnOpcoes.add(btnIniciarSimulacao);
+
+        btnPararSimulacao.setText("Parar Simulação");
+        btnPararSimulacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPararSimulacaoActionPerformed(evt);
+            }
+        });
+        mnOpcoes.add(btnPararSimulacao);
 
         btnConfiguracoes.setText("Configurações");
         btnConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +145,7 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
     private void btnIniciarSimulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSimulacaoActionPerformed
         try {
             controller.iniciaSimulacao();
+            btnPararSimulacao.setEnabled(true);
         } catch (InterruptedException ex) {
             Logger.getLogger(TelaMalha.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -144,6 +155,11 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
         TelaConfiguracoes tela = new TelaConfiguracoes();
         tela.setVisible(true);
     }//GEN-LAST:event_btnConfiguracoesActionPerformed
+
+    private void btnPararSimulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPararSimulacaoActionPerformed
+        controller.pararSimulacao();
+        btnPararSimulacao.setEnabled(false);
+    }//GEN-LAST:event_btnPararSimulacaoActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
@@ -151,6 +167,7 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
     private javax.swing.JMenuItem btnConfiguracoes;
     private javax.swing.JMenuItem btnIniciarSimulacao;
     private javax.swing.JMenuItem btnLimpar;
+    private javax.swing.JMenuItem btnPararSimulacao;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnOpcoes;

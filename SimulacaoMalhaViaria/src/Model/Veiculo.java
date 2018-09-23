@@ -31,8 +31,11 @@ public class Veiculo extends Thread{
         while (ativo && (atual != null)){
             obs.setaPosicaoCarro(atual.getCaminho().get(posicaoAtual));
             
-            for (posicaoAtual = posicaoAtual + 1; posicaoAtual < atual.getCaminho().size() - 1; posicaoAtual++){
+            for (posicaoAtual = posicaoAtual + 1; posicaoAtual < atual.getCaminho().size() - 1; posicaoAtual++){                
                 desalocaAnterior();
+                if (!ativo){
+                    return;
+                }
                 alocaAtual();                
                 try {
                     sleep(50);
@@ -42,6 +45,10 @@ public class Veiculo extends Thread{
             }            
             
             trocarCaminho();            
+        }
+        
+        if (!ativo){
+            desalocaAnterior();
         }
     }   
     

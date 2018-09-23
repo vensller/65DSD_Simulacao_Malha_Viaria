@@ -16,11 +16,19 @@ public class ControllerConfiguracoes {
         Configuracoes.getInstance().setOpcaoExclusaoMutua(opcao);
     }
     
+    public void defineIntervalo(int intervalo){
+        Configuracoes.getInstance().setIntervalo(intervalo);
+    }
+    
     public int getNumeroVeiculos(){
         return Configuracoes.getInstance().getNumeroVeiculos();
     }
     
     public int getExclusaoMutua(){
         return Configuracoes.getInstance().getOpcaoExclusaoMutua();
+    }
+
+    public int getIntervaloSelecao() {
+        return Configuracoes.getInstance().getIntervalo();
     }
 }

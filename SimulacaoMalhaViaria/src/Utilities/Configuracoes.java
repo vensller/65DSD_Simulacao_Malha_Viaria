@@ -9,9 +9,11 @@ public class Configuracoes {
     private static Configuracoes instance;
     private int numeroVeiculos;
     private int opcaoExclusaoMutua;
+    private int intervalo;
     
     private Configuracoes(){
         numeroVeiculos = 1;
+        intervalo = 1;
         opcaoExclusaoMutua = 0;        
     }
     
@@ -37,8 +39,15 @@ public class Configuracoes {
 
     public void setOpcaoExclusaoMutua(int opcaoExclusaoMutua) {
         this.opcaoExclusaoMutua = opcaoExclusaoMutua;
+    }   
+
+    public int getIntervalo() {
+        return intervalo;
     }
-    
+
+    public void setIntervalo(int intervalo) {
+        this.intervalo = intervalo;
+    }
     
     
 }

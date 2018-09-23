@@ -88,12 +88,21 @@ public class ControllerMalha implements ObservadorVeiculo{
             Veiculo veiculo = new Veiculo(malha, this);
             veiculos.add(veiculo);
             veiculo.start();
+            Thread.sleep(Configuracoes.getInstance().getIntervalo());
+        }
+    }
+    
+    public void pararSimulacao(){
+        for (Veiculo v : veiculos){
+            v.desativar();
         }
     }
     
     @Override
     public synchronized void removeDesenhoCarro(Vertice v) {
-        malha.getVerticesCarros().remove(v);
+        if (malha != null){
+            malha.getVerticesCarros().remove(v);
+        }
     }
     
     @Override
