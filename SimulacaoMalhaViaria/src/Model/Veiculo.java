@@ -48,7 +48,7 @@ public class Veiculo extends Thread{
         }
         
         if (!ativo){
-            desalocaAnterior();
+            obs.removeDesenhoCarro(atual.getCaminho().get(posicaoAtual - 1));
         }
     }   
     
