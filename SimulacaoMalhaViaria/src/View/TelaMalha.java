@@ -157,7 +157,11 @@ public class TelaMalha extends javax.swing.JFrame implements ObservadorMalha{
     }//GEN-LAST:event_btnConfiguracoesActionPerformed
 
     private void btnPararSimulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPararSimulacaoActionPerformed
-        controller.pararSimulacao();
+        try {
+            controller.pararSimulacao();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TelaMalha.class.getName()).log(Level.SEVERE, null, ex);
+        }
         btnPararSimulacao.setEnabled(false);
     }//GEN-LAST:event_btnPararSimulacaoActionPerformed
     

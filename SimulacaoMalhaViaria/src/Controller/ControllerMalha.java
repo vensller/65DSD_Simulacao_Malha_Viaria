@@ -62,7 +62,7 @@ public class ControllerMalha implements ObservadorVeiculo{
        this.observadoresDesenhos.remove(observador);
     }       
    
-    public void desenhaCarros(){
+    public synchronized void desenhaCarros(){
         if (malha != null){
             for (Vertice v : malha.getVerticesCarros()){
                 desenhaCarro(v.getX(), v.getY());
@@ -92,10 +92,16 @@ public class ControllerMalha implements ObservadorVeiculo{
         }
     }
     
-    public void pararSimulacao(){
+    public void pararSimulacao() throws InterruptedException{
         for (Veiculo v : veiculos){
             v.desativar();
+        }       
+        
+        for (Veiculo v : veiculos){
+            v.join();
         }
+        
+        repintar();                
     }
     
     @Override

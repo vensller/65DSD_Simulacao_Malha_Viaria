@@ -1,8 +1,6 @@
 package Model;
 
 import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,29 +29,41 @@ public class Veiculo extends Thread{
         while (ativo && (atual != null)){
             obs.setaPosicaoCarro(atual.getCaminho().get(posicaoAtual));
             
+            if (!ativo){
+                break;
+            }
+            
             for (posicaoAtual = posicaoAtual + 1; posicaoAtual < atual.getCaminho().size() - 1; posicaoAtual++){                
-                desalocaAnterior();
-                if (!ativo){
-                    return;
-                }
+                desalocaAnterior();                
                 alocaAtual();                
                 try {
                     sleep(50);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Veiculo.class.getName()).log(Level.SEVERE, null, ex);
                 }                
-            }            
+                if (!ativo){
+                    break;
+                }
+            }                
             
-            trocarCaminho();            
-        }
+            if (ativo)
+                trocarCaminho();  
+        } 
         
-        if (!ativo){
-            obs.removeDesenhoCarro(atual.getCaminho().get(posicaoAtual - 1));
+        if (!ativo && (atual != null)){
+            desalocaAtual();
         }
     }   
     
     public void desativar(){
-        ativo = false;
+        ativo = false;    
+    }
+    
+    private void desalocaAtual(){
+        if (atual.getCaminho().size() > posicaoAtual){
+            obs.removeDesenhoCarro(atual.getCaminho().get(posicaoAtual));
+            atual.getCaminho().get(posicaoAtual).desalocar();
+        }
     }
     
     private void desalocaAnterior(){
